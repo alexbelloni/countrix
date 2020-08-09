@@ -10,6 +10,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { ReactQueryDevtools } from 'react-query-devtools'
 
 const Wrapper = styled.section`
   background: ${props => props.theme.background};
@@ -83,7 +84,10 @@ function App() {
   }
 
   const Query = () => {
-    const { data, status } = useQuery("all", fetchCountries);
+    const { data, status } = useQuery("all", fetchCountries, {
+      staleTime: 5000,
+      cacheTime: 10,
+    });
 
     if (status === "success" && allCountries.length === 0) {
       setTimeout(() => {
@@ -158,31 +162,34 @@ function App() {
   }
 
   return (
-    <Wrapper theme={theme}>
-      <Header theme={theme} modeClick={modeClick} />
-      <Router>
-        <Switch>
-          <Route path="/detail/:id">
-            <CountryDetail theme={theme} getCountry={getCountryByAlpha3Code} getCountryName={getCountryNameByAlpha3Code} />
-          </Route>
-          <Route path="/">
-            <Query />
-            <FiltersArea>
-              <Keyword theme={theme}>
-                <input id="keyword" onChange={() => updateDataByKeyword()} placeholder="Search for a country" />
-              </Keyword>
-              <Filter theme={theme}>
-                <select id="filterSelect" defaultValue={FilterUndefinedLabel} onChange={() => updateDataByFilter()}>
-                  <option key={-1}>{FilterUndefinedLabel}</option>
-                  {getFilterOptions()}
-                </select>
-              </Filter>
-            </FiltersArea>
-            <CardList theme={theme} data={countries} />
-          </Route>
-        </Switch>
-      </Router>
-    </Wrapper>
+    <>
+      <Wrapper theme={theme}>
+        <Header theme={theme} modeClick={modeClick} />
+        <Router>
+          <Switch>
+            <Route path="/detail/:id">
+              <CountryDetail theme={theme} getCountry={getCountryByAlpha3Code} getCountryName={getCountryNameByAlpha3Code} />
+            </Route>
+            <Route path="/">
+              <Query />
+              <FiltersArea>
+                <Keyword theme={theme}>
+                  <input id="keyword" onChange={() => updateDataByKeyword()} placeholder="Search for a country" />
+                </Keyword>
+                <Filter theme={theme}>
+                  <select id="filterSelect" defaultValue={FilterUndefinedLabel} onChange={() => updateDataByFilter()}>
+                    <option key={-1}>{FilterUndefinedLabel}</option>
+                    {getFilterOptions()}
+                  </select>
+                </Filter>
+              </FiltersArea>
+              <CardList theme={theme} data={countries} />
+            </Route>
+          </Switch>
+        </Router>
+      </Wrapper>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </>
   );
 }
 
