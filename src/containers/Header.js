@@ -10,6 +10,7 @@ const MenuArea = styled.div`
     padding: 20px 15px;
     background: ${props => props.theme.elements};
     color: ${props => props.theme.text};
+    z-index: 1000;
 `;
 
 const Logo = styled.div`

@@ -25,6 +25,23 @@ const Image = styled.div`
     &>img{
         width: 100%;
     }
+
+    /*flag effect*/
+    overflow: hidden;
+    position: relative;
+
+    /*flag effect*/
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(45deg, rgba(0,0,0,.25) 0%, rgba(255,255,255,.25) 15%, rgba(0,0,0,.25) 30%, rgba(255,255,255,.25) 45%, rgba(0,0,0,.25) 60%, rgba(255,255,255,.25) 75%, rgba(0,0,0,.25) 90%);
+      }
+
 `;
 
 const Info = styled.div`
