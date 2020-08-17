@@ -23,44 +23,17 @@ const Section = styled.div`
     }
 `;
 
-/**
- * .flag {
-  width: 400px;
-  height: 250px;
-  overflow: hidden;
-  position: relative;
-  margin: 50px auto;
-  box-shadow: 0 0 15px 0 rgba(0,0,0,.15)
-}
-
-.flag img {
-  width: 400px;
-  height: 250px
-}
-
-.flag::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(45deg, rgba(0,0,0,.25) 0%, rgba(255,255,255,.25) 15%, rgba(0,0,0,.25) 30%, rgba(255,255,255,.25) 45%, rgba(0,0,0,.25) 60%, rgba(255,255,255,.25) 75%, rgba(0,0,0,.25) 90%);
-}
- */
 const Image = styled.div`
     height: 200px;
     border-radius: 5px 5px 0 0;
-
-    /*flag effect*/
-    overflow: hidden;
-    position: relative;
-  
+ 
     &>img{
         width: 100%;
     }
 
+    /*flag effect*/
+    overflow: hidden;
+    position: relative;
     /*flag effect*/
     &::after {
         content: "";
@@ -114,7 +87,7 @@ const MiniCard = props => {
         <Section {...props} key={name} >
             <Link to={`/detail/${alpha3Code}`}>
                 <Image src={flag}>
-                    <img alt={name} src={flag}/>
+                    <img alt={name} src={flag} />
                 </Image>
                 <Info>
                     <Title>{name.length > 30 ? `${name.substr(0, 28)}...` : name}</Title>

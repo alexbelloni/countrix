@@ -7,7 +7,7 @@ import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
 const MenuArea = styled.div`
     position: fixed;
     width: 100%;
-    padding: 20px 15px;
+    padding: 10px 15px;
     background: ${props => props.theme.elements};
     color: ${props => props.theme.text};
     z-index: 1000;
@@ -34,7 +34,7 @@ const Modes = styled.div`
     &:hover{
         cursor: pointer;
     }
-    `;
+`;
 
 const Header = props => {
     return (
