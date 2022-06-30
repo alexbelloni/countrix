@@ -36,7 +36,12 @@ It's a work in progress. When praticing or reviewing a tech subject, I'll apply 
 [Website](https://countrix.netlify.app/)  
 [GitHub](https://github.com/alexbelloni/countrix)
 
-
+Cross Browser Testing tools:   
+browserstack  
+cypress com
+  
+  componentes no storybook  
+  
 
 
 

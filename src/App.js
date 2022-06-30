@@ -14,9 +14,15 @@ import { ReactQueryDevtools } from 'react-query-devtools'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBroom } from '@fortawesome/free-solid-svg-icons'
 
-const Wrapper = styled.section`
-  background: ${props => props.theme.background};
-`;
+// const Wrapper = styled.section`
+//   background: ${props => props.theme.background};
+// `;
+
+const Wrapper = styled.section.attrs(props => ({
+  style: {
+    background: props.theme.background,
+  },
+}))``
 
 const FiltersArea = styled.div`
   padding-top: 90px;
@@ -30,14 +36,17 @@ const FiltersArea = styled.div`
   }
 `;
 
-const Keyword = styled.div`
+const Keyword = styled.div.attrs(props => ({
+  style: {
+    background: props.theme.background,
+  },
+}))`
   display: flex;
   align-items: center;
-  background: ${props => props.theme.background};
   padding: 20px 15px;
 
   &>input{
-   min-width: 297px;
+   /*min-width: 247px;*/
    border-radius: 5px;
    padding:10px;
    font: inherit;
