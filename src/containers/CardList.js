@@ -9,7 +9,8 @@ const Section = styled.div`
     align-items: center;
     background-color: ${props => props.theme.background};
     
-    @media(min-width: 1440px ){
+    /*320px, 768px, and 1200px*/
+    @media(min-width: 768px ){
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-around;
