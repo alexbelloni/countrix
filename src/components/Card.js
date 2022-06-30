@@ -118,12 +118,14 @@ const Card = props => {
                 <FieldValue><Field>Top Level Domain:</Field><Value>{topLevelDomain}</Value></FieldValue>
                 <FieldValue><Field>Currencies:</Field><Value>{currencies.map(c => c.name).toString()}</Value></FieldValue>
                 <FieldValue><Field>Languages:</Field><Value>{languages.map(c => c.name).toString()}</Value></FieldValue>
-                <Borders>
-                    <span>Border Countries:</span>
-                    <Countries>
-                        {borders.map(code => <Border key={code} {...props}>{props.getCountryName(code) || "Ipsum"}</Border>)}
-                    </Countries>
-                </Borders>
+                {borders && (
+                    <Borders>
+                        <span>Border Countries:</span>
+                        <Countries>
+                            {borders.map(code => <Border key={code} {...props}>{props.getCountryName(code) || "Ipsum"}</Border>)}
+                        </Countries>
+                    </Borders>
+                )}
             </Info>
         </Section>
     )
