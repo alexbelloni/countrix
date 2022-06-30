@@ -43,10 +43,11 @@ const Keyword = styled.div.attrs(props => ({
 }))`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 20px 15px;
 
   &>input{
-   /*min-width: 247px;*/
+   width: 100%;
    border-radius: 5px;
    padding:10px;
    font: inherit;
@@ -186,7 +187,7 @@ function App() {
             </Route>
             <Route path="/">
               <Query />
-              <FiltersArea>
+               <FiltersArea>
                 <Keyword theme={theme}>
                   <input id="keyword" value={keyword} onChange={() => updateDataByKeyword()} placeholder="Search for a country" />
                   <CleanButton theme={theme} onClick={() => updateDataByKeyword(true)} > <FontAwesomeIcon icon={faBroom} /></CleanButton>
@@ -198,7 +199,7 @@ function App() {
                   </select>
                 </Filter>
               </FiltersArea>
-              <CardList theme={theme} data={countries} />
+             <CardList theme={theme} data={countries} /> 
             </Route>
           </Switch>
         </Router>
