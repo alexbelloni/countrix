@@ -8,15 +8,11 @@ import CountryDetail from './containers/CountryDetail';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from "react-router-dom";
 import { ReactQueryDevtools } from 'react-query-devtools'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBroom } from '@fortawesome/free-solid-svg-icons'
-
-// const Wrapper = styled.section`
-//   background: ${props => props.theme.background};
-// `;
 
 const Wrapper = styled.section.attrs(props => ({
   style: {
@@ -55,6 +51,10 @@ const Keyword = styled.div.attrs(props => ({
    color: ${props => props.theme.text};
    border: 1px solid rgba(0, 0, 0, 0.3);
    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  &>input::placeholder {
+    color: ${props => props.theme.text};
   }
 `;
 
@@ -179,15 +179,15 @@ function App() {
   return (
     <>
       <Wrapper theme={theme}>
-        <Header theme={theme} modeClick={modeClick} />
         <Router>
+          <Header theme={theme} modeClick={modeClick} />
           <Switch>
             <Route path="/detail/:id">
               <CountryDetail theme={theme} getCountry={getCountryByAlpha3Code} getCountryName={getCountryNameByAlpha3Code} />
             </Route>
             <Route path="/">
               <Query />
-               <FiltersArea>
+              <FiltersArea>
                 <Keyword theme={theme}>
                   <input id="keyword" value={keyword} onChange={() => updateDataByKeyword()} placeholder="Search for a country" />
                   <CleanButton theme={theme} onClick={() => updateDataByKeyword(true)} > <FontAwesomeIcon icon={faBroom} /></CleanButton>
@@ -199,7 +199,7 @@ function App() {
                   </select>
                 </Filter>
               </FiltersArea>
-             <CardList theme={theme} data={countries} /> 
+              <CardList theme={theme} data={countries} />
             </Route>
           </Switch>
         </Router>

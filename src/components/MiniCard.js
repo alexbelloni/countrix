@@ -2,18 +2,16 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from "react-router-dom";
 
-const Section = styled.div`
+const Section = styled.div.attrs(props => ({
+  style: {
+    color: props.theme.text,
+    backgroundColor: props.theme.elements
+  },
+}))`
     border-radius: 5px;
-    color: ${props => props.theme.text};
-    background-color: ${props => props.theme.elements};
     margin: 25px 0;
     max-width: 320px;
     
-    &>a{
-        text-decoration: none;
-        color: ${props => props.theme.text};
-    }
-
     &:hover{
         cursor: pointer;
     }
@@ -23,13 +21,24 @@ const Section = styled.div`
     }
 `;
 
-const Image = styled.div`
+const MyLink = styled(Link).attrs(props => ({
+    style: {
+      color: props.theme.text,
+    },
+  }))`
+    text-decoration: none;
+`
+
+const Image = styled.div.attrs(props => {
+    return ({
+    style: {
+        background: `url("${props.src}") no-repeat`,
+        backgroundSize: "cover",
+    },
+  })
+})`
     height: 200px;
     border-radius: 5px 5px 0 0;
- 
-    &>img{
-        width: 100%;
-    }
 
     /*flag effect*/
     overflow: hidden;
@@ -45,19 +54,14 @@ const Image = styled.div`
         height: 100%;
         background: linear-gradient(45deg, rgba(0,0,0,.25) 0%, rgba(255,255,255,.25) 15%, rgba(0,0,0,.25) 30%, rgba(255,255,255,.25) 45%, rgba(0,0,0,.25) 60%, rgba(255,255,255,.25) 75%, rgba(0,0,0,.25) 90%);
       }
-
-      
-    @media(min-width: 1440px ){
-        background: url("${props => props.src}") no-repeat;
-        background-size: cover;
-
-        &>img{
-            display:none;
-        }
-    }
 `;
 
-const Info = styled.div`
+const Info = styled.div.attrs(props => ({
+    style: {
+      color: props.theme.text,
+      backgroundColor: props.theme.elements
+    },
+  }))`
     display: flex;
     flex-direction: column;
     margin: 20px 20px 30px 20px;
@@ -67,7 +71,8 @@ const Title = styled.span`
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 20px;
-`;
+    color: props.theme.text,
+`
 
 const FieldValue = styled.div`
     display: flex;
@@ -84,18 +89,16 @@ const Value = styled.span`
 const MiniCard = props => {
     const { flag, name, population, region, capital, alpha3Code } = props.country;
     return (
-        <Section {...props} key={name} >
-            <Link to={`/detail/${alpha3Code}`}>
-                <Image src={flag}>
-                    <img alt={name} src={flag} />
-                </Image>
-                <Info>
+        <Section {...props} key={name} id={alpha3Code} >
+            <MyLink to={`/detail/${alpha3Code}`}>
+                <Image src={flag} />
+                <Info theme={props.theme}>
                     <Title>{name.length > 30 ? `${name.substr(0, 28)}...` : name}</Title>
                     <FieldValue><Field>Population:</Field><Value>{new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(population)}</Value></FieldValue>
                     <FieldValue><Field>Region:</Field><Value>{region}</Value></FieldValue>
                     <FieldValue><Field>Capital:</Field><Value>{capital}</Value></FieldValue>
                 </Info>
-            </Link>
+            </MyLink>
         </Section>
     )
 }

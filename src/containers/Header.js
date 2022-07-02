@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import logo from '../images/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
+import {
+    Redirect,
+} from "react-router-dom";
 
 const MenuArea = styled.div`
     position: fixed;
@@ -18,6 +21,12 @@ const Logo = styled.div`
     top 0;
     left: 0;
     background: ${props => props.theme.elements};
+    z-index: 1;
+    width: fit-content;
+
+    &:hover{
+        cursor: pointer;
+    }
 `;
 
 const Image = styled.img`
@@ -30,23 +39,35 @@ const Modes = styled.div`
     left: -40px;
     text-align: right;
     background: ${props => props.theme.elements};
+    display: flex;
+    justify-content: right;
 
-    &:hover{
+    &>div:hover{
         cursor: pointer;
     }
 `;
 
-const Header = props => {
+const Header = ({ theme, modeClick }) => {
+    const [goHome, setGoHome] = useState(false);
+
     return (
-        <MenuArea theme={props.theme} className="menu">
-            <Logo>
+        <MenuArea theme={theme} className="menu">
+            {goHome && <Redirect to="/" />}
+            <Logo onClick={() => {
+                setGoHome(true);
+                setTimeout(() => {
+                    setGoHome(false)
+                }, 1000);
+            }}>
                 <Image src={logo} />
             </Logo>
-            <Modes onClick={() => props.modeClick()}>
-                {!props.theme.light ?
-                    <div><FontAwesomeIcon icon={faSun} /> <span>Light Mode</span></div> :
-                    <div><FontAwesomeIcon icon={faMoon} /> <span>Dark Mode</span></div>
-                }
+            <Modes>
+                <div style={{ width: "fit-content" }} onClick={() => modeClick()}>
+                    {!theme.light ?
+                        <><FontAwesomeIcon icon={faSun} /> <span>Light Mode</span></> :
+                        <><FontAwesomeIcon icon={faMoon} /> <span>Dark Mode</span></>
+                    }
+                </div>
             </Modes>
         </MenuArea>
     )

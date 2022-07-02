@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useParams } from "react-router-dom";
+import {
+    Redirect,
+} from "react-router-dom";
 
 const Section = styled.div`
     font-size: 16px;
@@ -97,12 +100,26 @@ const Border = styled.div`
     background: ${props => props.theme.background};
     border: thin;
     margin: 0 5px 5px 0;
+    cursor: pointer;
+
+    &:hover{
+        border: 1px solid gray;
+    }
 `;
 
 const Card = props => {
+    const [redirect, setRedirect] = useState();
+
     const country = props.getCountry(useParams().id);
-    const { flag, name, population, region, capital, subregion, nativeName, topLevelDomain, currencies, languages, borders } = country;
-    return (
+    const { flag, name, population, region, capital, subregion, nativeName, topLevelDomain, currencies, languages, borders, alpha3Code } = country;
+
+    useEffect(() => {
+        if (alpha3Code === redirect) {
+            setRedirect('')
+        }
+    }, [redirect, alpha3Code])
+
+    return redirect ? <Redirect to={`/detail/${redirect}`} /> : (
         <Section {...props}>
             <Image>
                 <img alt={name} src={flag} />
@@ -122,7 +139,9 @@ const Card = props => {
                     <Borders>
                         <span>Border Countries:</span>
                         <Countries>
-                            {borders.map(code => <Border key={code} {...props}>{props.getCountryName(code) || "Ipsum"}</Border>)}
+                            {borders.map(code => <Border key={code} {...props} onClick={
+                                () => setRedirect(code)
+                            }>{props.getCountryName(code)}</Border>)}
                         </Countries>
                     </Borders>
                 )}
