@@ -10,6 +10,7 @@ const Section = styled.div.attrs(props => ({
 }))`
     border-radius: 5px;
     margin: 25px 0;
+    min-width: 290px;
     max-width: 320px;
     
     &:hover{
@@ -71,7 +72,6 @@ const Title = styled.span`
     font-weight: bold;
     font-size: 18px;
     margin-bottom: 20px;
-    color: props.theme.text,
 `
 
 const FieldValue = styled.div`

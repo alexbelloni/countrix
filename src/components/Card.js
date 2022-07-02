@@ -48,7 +48,12 @@ const Image = styled.div`
 
 `;
 
-const Info = styled.div`
+const Info = styled.div.attrs(props => ({
+    style: {
+      color: props.theme.text,
+      backgroundColor: props.theme.elements
+    },
+  }))`
     display: flex;
     flex-direction: column;
     margin: 20px 20px 30px 20px;
@@ -122,9 +127,9 @@ const Card = props => {
     return redirect ? <Redirect to={`/detail/${redirect}`} /> : (
         <Section {...props}>
             <Image>
-                <img alt={name} src={flag} />
+                <img alt={`flag of ${name}`} src={flag} />
             </Image>
-            <Info>
+            <Info theme={props.theme}>
                 <Title>{name.length > 30 ? `${name.substr(0, 28)}...` : name}</Title>
                 <FieldValue><Field>Native Name:</Field><Value>{nativeName}</Value></FieldValue>
                 <FieldValue><Field>Population:</Field><Value>{new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(population)}</Value></FieldValue>

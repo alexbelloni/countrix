@@ -7,7 +7,7 @@ import {
     Redirect,
 } from "react-router-dom";
 
-const MenuArea = styled.div`
+const MenuArea = styled.header`
     position: fixed;
     width: 100%;
     padding: 10px 15px;
@@ -33,7 +33,7 @@ const Image = styled.img`
     width: 150px;
 `;
 
-const Modes = styled.div`
+const Modes = styled.nav`
     position: relative;
     top -27px;
     left: -40px;

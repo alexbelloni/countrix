@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faLongArrowAltLeft } from '@fortawesome/free-solid-svg-icons'
 
 const Section = styled.div`
-    padding: 100px 20px 20px 20px;
     background-color: ${props => props.theme.background};
     display:flex;
     flex-direction: column;
@@ -51,7 +50,7 @@ const CountryDetail = props => {
                 </ButtonBack>
             </div>
             <Detail className='detail'>
-                <Card getCountry={props.getCountry} getCountryName={props.getCountryName}/>
+                <Card theme={props.theme} getCountry={props.getCountry} getCountryName={props.getCountryName}/>
             </Detail>
         </Section>
     )

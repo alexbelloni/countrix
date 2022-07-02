@@ -20,19 +20,17 @@ const Wrapper = styled.section.attrs(props => ({
   },
 }))``
 
-const FiltersArea = styled.div`
-  padding-top: 90px;
+const FiltersArea = styled.section`
   display: flex;
   flex-direction: column;
 
   @media (min-width: 1440px){
     flex-direction: row;
     justify-content: space-between;
-    padding: 90px 20px 0 20px;
   }
 `;
 
-const Keyword = styled.div.attrs(props => ({
+const Keyword = styled.article.attrs(props => ({
   style: {
     background: props.theme.background,
   },
@@ -40,7 +38,7 @@ const Keyword = styled.div.attrs(props => ({
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 15px;
+  
 
   &>input{
    width: 100%;
@@ -67,7 +65,6 @@ const CleanButton = styled.div`
 
 const Filter = styled.div`
   background: ${props => props.theme.background};
-  padding: 20px 15px;
 
   &>select{
    min-width: 100px;
@@ -80,6 +77,10 @@ const Filter = styled.div`
    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
   }
 `;
+
+const Main = styled.main`
+padding: 80px 15px;
+`
 
 function App() {
   const [mode, setMode] = useState(1);
@@ -181,28 +182,32 @@ function App() {
       <Wrapper theme={theme}>
         <Router>
           <Header theme={theme} modeClick={modeClick} />
-          <Switch>
-            <Route path="/detail/:id">
-              <CountryDetail theme={theme} getCountry={getCountryByAlpha3Code} getCountryName={getCountryNameByAlpha3Code} />
-            </Route>
-            <Route path="/">
-              <Query />
-              <FiltersArea>
-                <Keyword theme={theme}>
-                  <input id="keyword" value={keyword} onChange={() => updateDataByKeyword()} placeholder="Search for a country" />
-                  <CleanButton theme={theme} onClick={() => updateDataByKeyword(true)} > <FontAwesomeIcon icon={faBroom} /></CleanButton>
-                </Keyword>
-                <Filter theme={theme}>
-                  <select id="filterSelect" defaultValue={FilterUndefinedLabel} onChange={() => updateDataByFilter()}>
-                    <option key={-1}>{FilterUndefinedLabel}</option>
-                    {getFilterOptions()}
-                  </select>
-                </Filter>
-              </FiltersArea>
-              <CardList theme={theme} data={countries} />
-            </Route>
-          </Switch>
+          <Main>
+            <h1 style={{color:"gray"}}>COUNTRIX - The Flag Collection</h1>
+            <Switch>
+              <Route path="/detail/:id">
+                <CountryDetail theme={theme} getCountry={getCountryByAlpha3Code} getCountryName={getCountryNameByAlpha3Code} />
+              </Route>
+              <Route path="/">
+                <Query />
+                <FiltersArea>
+                  <Keyword theme={theme}>
+                    <input id="keyword" value={keyword} onChange={() => updateDataByKeyword()} placeholder="Search for a country" />
+                    <CleanButton theme={theme} onClick={() => updateDataByKeyword(true)} > <FontAwesomeIcon icon={faBroom} /></CleanButton>
+                  </Keyword>
+                  <Filter theme={theme}>
+                    <select id="filterSelect" aria-label="Country's Region" defaultValue={FilterUndefinedLabel} onChange={() => updateDataByFilter()}>
+                      <option key={-1}>{FilterUndefinedLabel}</option>
+                      {getFilterOptions()}
+                    </select>
+                  </Filter>
+                </FiltersArea>
+                <CardList theme={theme} data={countries} />
+              </Route>
+            </Switch>
+          </Main>
         </Router>
+        <footer><span style={{fontSize:'0.5rem'}}>COUNTRIX - The Flag Collection</span></footer>
       </Wrapper>
       <ReactQueryDevtools initialIsOpen={false} />
     </>
