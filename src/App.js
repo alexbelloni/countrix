@@ -207,7 +207,7 @@ function App() {
             </Switch>
           </div>
         </Router>
-        <footer><span style={{ fontSize: '0.5rem' }}>COUNTRIX - The Flag Collection</span></footer>
+        <footer style={{ textAlign: "center", fontSize: '0.8rem', padding: "10px" }}><span>COUNTRIX - The Flag Collection . </span><a href="https://alexandrebelloni.com">Alexandre Alves</a></footer>
       </Main>
       <ReactQueryDevtools initialIsOpen={false} />
     </>
