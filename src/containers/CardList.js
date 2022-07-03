@@ -18,12 +18,12 @@ const Section = styled.div`
     }
 `;
 
-const CardList = props => {
-    const { data } = props;
+const CardList = ({theme, getCountries}) => {
+    const data = getCountries();
 
     return (
-        <Section {...props}>
-            {data && data.map(d => <MiniCard key={d.name} {...props} country={d} />)}
+        <Section theme={theme}>
+            {data && data.map(d => <MiniCard key={d.name} theme={theme} country={d} />)}
         </Section>
     )
 }

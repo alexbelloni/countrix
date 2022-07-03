@@ -33,7 +33,7 @@ const MyLink = styled(Link).attrs(props => ({
 const Image = styled.div.attrs(props => {
     return ({
     style: {
-        background: `url("${props.src}") no-repeat`,
+        background: `url("${props.flag}") no-repeat`,
         backgroundSize: "cover",
     },
   })
@@ -91,7 +91,7 @@ const MiniCard = props => {
     return (
         <Section {...props} key={name} id={alpha3Code} >
             <MyLink to={`/detail/${alpha3Code}`}>
-                <Image src={flag} />
+                <Image flag={flag} />
                 <Info theme={props.theme}>
                     <Title>{name.length > 30 ? `${name.substr(0, 28)}...` : name}</Title>
                     <FieldValue><Field>Population:</Field><Value>{new Intl.NumberFormat('en-US', { maximumSignificantDigits: 3 }).format(population)}</Value></FieldValue>

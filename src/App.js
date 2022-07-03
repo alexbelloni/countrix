@@ -174,6 +174,10 @@ function App() {
     return country && country.name;
   }
 
+  function getCountries() {
+    return countries
+  }
+
   return (
     <>
       <Main theme={theme}>
@@ -198,7 +202,7 @@ function App() {
                     </select>
                   </Filter>
                 </FiltersArea>
-                <CardList theme={theme} data={countries} />
+                <CardList theme={theme} getCountries={getCountries} />
               </Route>
             </Switch>
           </div>
