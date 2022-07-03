@@ -119,6 +119,7 @@ const Card = props => {
     const { flag, name, population, region, capital, subregion, nativeName, topLevelDomain, currencies, languages, borders, alpha3Code } = country;
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         if (alpha3Code === redirect) {
             setRedirect('')
         }

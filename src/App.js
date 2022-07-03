@@ -14,11 +14,12 @@ import { ReactQueryDevtools } from 'react-query-devtools'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBroom } from '@fortawesome/free-solid-svg-icons'
 
-const Wrapper = styled.section.attrs(props => ({
+const Main = styled.section.attrs(props => ({
   style: {
     background: props.theme.background,
   },
-}))``
+}))`
+padding: 0 15px;`
 
 const FiltersArea = styled.section`
   display: flex;
@@ -77,10 +78,6 @@ const Filter = styled.div`
    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.2);
   }
 `;
-
-const Main = styled.main`
-padding: 80px 15px;
-`
 
 function App() {
   const [mode, setMode] = useState(1);
@@ -179,16 +176,15 @@ function App() {
 
   return (
     <>
-      <Wrapper theme={theme}>
+      <Main theme={theme}>
         <Router>
           <Header theme={theme} modeClick={modeClick} />
-          <Main>
-            <h1 style={{color:"gray"}}>COUNTRIX - The Flag Collection</h1>
+          <div style={{ padding: "120px 0" }}>
             <Switch>
               <Route path="/detail/:id">
                 <CountryDetail theme={theme} getCountry={getCountryByAlpha3Code} getCountryName={getCountryNameByAlpha3Code} />
               </Route>
-              <Route path="/">
+              <Route exact path="/">
                 <Query />
                 <FiltersArea>
                   <Keyword theme={theme}>
@@ -205,10 +201,10 @@ function App() {
                 <CardList theme={theme} data={countries} />
               </Route>
             </Switch>
-          </Main>
+          </div>
         </Router>
-        <footer><span style={{fontSize:'0.5rem'}}>COUNTRIX - The Flag Collection</span></footer>
-      </Wrapper>
+        <footer><span style={{ fontSize: '0.5rem' }}>COUNTRIX - The Flag Collection</span></footer>
+      </Main>
       <ReactQueryDevtools initialIsOpen={false} />
     </>
   );

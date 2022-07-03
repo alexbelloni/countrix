@@ -14,6 +14,8 @@ const MenuArea = styled.header`
     background: ${props => props.theme.elements};
     color: ${props => props.theme.text};
     z-index: 1000;
+    height: 80px;
+    left: 0;
 `;
 
 const Logo = styled.div`
@@ -35,7 +37,7 @@ const Image = styled.img`
 
 const Modes = styled.nav`
     position: relative;
-    top -27px;
+    top -90px;
     left: -40px;
     text-align: right;
     background: ${props => props.theme.elements};
@@ -59,8 +61,10 @@ const Header = ({ theme, modeClick }) => {
                     setGoHome(false)
                 }, 1000);
             }}>
-                <Image src={logo} />
+                <Image alt="logo" src={logo} />
+                <h1 style={{color:"gray", marginTop: "0"}}>The Flag Collection</h1>
             </Logo>
+            
             <Modes>
                 <div style={{ width: "fit-content" }} onClick={() => modeClick()}>
                     {!theme.light ?
@@ -69,6 +73,7 @@ const Header = ({ theme, modeClick }) => {
                     }
                 </div>
             </Modes>
+            
         </MenuArea>
     )
 }
