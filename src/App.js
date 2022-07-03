@@ -14,7 +14,7 @@ import { ReactQueryDevtools } from 'react-query-devtools'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBroom } from '@fortawesome/free-solid-svg-icons'
 
-const Main = styled.section.attrs(props => ({
+const Main = styled.main.attrs(props => ({
   style: {
     background: props.theme.background,
   },
